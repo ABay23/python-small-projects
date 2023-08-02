@@ -47,7 +47,7 @@ while True:
             for item in tod:
                 print(f"Number:{int(tod.index(item))} - {item}\n")
 
-            ed = int(input("Edit Number? \n"))
+            ed = int(input("Enter the number to edit, Number? \n"))
             msg = str(input("Updated to do: "))
             tod[ed] = msg
         case 'exit':
