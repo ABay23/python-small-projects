@@ -30,25 +30,46 @@
 #     todxs.append(todx)
 #     print(todxs)
 
-tod = []
+# tod = []
 
 while True:
     user_input = input("Enter add, show, edit or exit ")
     user_input = user_input.lower().strip()
     match user_input:
         case 'add':
-            todx = input("Enter a todo: ")
+            todx = input("Enter a todo: ") + "\n"
+
+            file = open('todo.txt', 'r')
+            tod = file.readlines()
+            file.close()
+
             tod.append(todx)
+            file = open('todo.txt', 'w')
+            file.writelines(tod)
+            file.close()
+
         case 'show':
-            for i in tod:
-                print(i)
+            file = open('todo.txt', 'r')
+            tod = file.readlines()
+            file.close()
+
+            for index, item in enumerate(tod):
+                print(f"{index +1} - {item}")
         case 'edit':
+            read = open('todo.txt', 'r')
+            tod = read.readlines()
+
             print("Enter the number you want to edit from the list\n")
             for item in tod:
-                print(f"Number:{int(tod.index(item))} - {item}\n")
+                print(f"Number:{int(tod.index(item))+1} - {item}\n")
 
-            ed = int(input("Enter the number to edit, Number? \n"))
-            msg = str(input("Updated to do: "))
+            ed = int(input("Enter the number to edit, Number? \n")) - 1
+            msg = str(input("Updated to do: ") + "\n")
             tod[ed] = msg
+
+            file = open('todo.txt', 'w')
+            file.writelines(tod)
+            file.close()
+
         case 'exit':
             break
